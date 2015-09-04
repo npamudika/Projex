@@ -18,7 +18,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <div class="container">
     <div class="raw">
-        <div class="jumbotron" style="width:600; height:550; background: #4f788e; margin-top: 50px; margin-left:280px;">
+        <div class="jumbotron" style="width:650; height:550; background: #4f788e; margin-top: 50px; margin-left:280px;">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title" style="font-weight:bold;text-transform:uppercase;">PROJECT DETAILS</h3>
@@ -44,7 +44,7 @@
                             </a>
                             <br>
                             <a href="#" class="list-group-item list-group-item-info">
-                                {{$project[0]->owner}}
+                                {{$user->name}}
                             </a>
                             <br>
                             <a href="#" class="list-group-item list-group-item-info">
@@ -65,7 +65,7 @@
             </div>
             <div class="panel">
                 <div class="panel-body">
-                    <a class="btn btn-primary btn-lg" href="" role="button" style="float:right; font-weight:bold;">Edit</a>
+                    <a class="btn btn-primary btn-lg" href="{!! action('PageController@viewDisplay')!!}" role="button" style="width:100; height:40; float:right; font-weight:bold;">Exit</a>
                 </div>
             </div>
         </div>

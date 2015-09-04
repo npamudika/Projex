@@ -35,7 +35,7 @@
         <h3 style="color: #edfdfd;">PROJECT MANAGEMENT APPLICATION</h3>
     </div>
     <div>
-        <a class="btn btn-default" href="{!! action('PageController@viewDisplayAll')!!}" style="width:150; height:40; background: #0d2945; margin-left:450px; font: bold; color: #edfdfd;">VIEW ALL</a>
+        <a class="btn btn-default" href="{!! action('PageController@viewDisplay')!!}" style="width:150; height:40; background: #0d2945; margin-left:450px; font: bold; color: #edfdfd;">VIEW ALL</a>
         <a class="btn btn-default" href="{!! action('PageController@viewAdd')!!}" style="width:150; height:40; background: #0d2945;  font: bold; color: #edfdfd;">ADD NEW PROJECT</a>
     </div>
 </div>

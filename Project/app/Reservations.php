@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Reservations extends Model
 {
-    protected $table = 'project';
+    protected $table = 'reservations';
     protected $primaryKey = 'id';
     public $timestamps = false;
-
 }

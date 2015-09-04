@@ -23,7 +23,7 @@
 
 <div class="container">
     <div class="Jambotron" style="width:650; height:400; background: #4f788e; margin-top: 70px; margin-left:250px;">
-        {!! Form::open(array('action'=>'PageController@viewAdd', 'class'=>'form-horizontal')) !!}
+        {!! Form::open(array('action'=>'PageController@addProjects', 'class'=>'form-horizontal')) !!}
             <div class="form-group">
                 {!! Form::label('project_name','Project Name',array('class'=>'col-sm-2 control-label')) !!}
                 <div class="col-sm-6">
@@ -60,11 +60,13 @@
                 <div class="col-sm-4 messages"></div>
             </div>
 
-            <button type="button" class="btn btn-default" data-dismiss="modal" style="width:150; height:40; background: #0d2945; margin-left:115px; font: bold; color: #edfdfd;">RESET</button>
+
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="width:150; height:40; background: #0d2945; margin-left:115px; font: bold; color: #edfdfd;">RESET</button>
             <a href="{!! action('PageController@viewHome')!!}">
                 <button type="button" class="btn btn-default" data-dismiss="modal" style="width:150; height:40; background: #0d2945;  font: bold; color: #edfdfd;">EXIT</button>
             </a>
-            <button type="submit" class="btn btn-primary" style="width:150; height:40; background: #0d2945;  font: bold; color: #edfdfd;">SUBMIT</button>
+        {!! Form::submit('CREATE PROJECT', array('class'=>'btn btn-primary', 'style'=>'font:bold; width:150; height:40; background: #0d2945;  font: bold; color: #edfdfd;')) !!}
+        {!! Form::close() !!}
 
     </div>
 </div>

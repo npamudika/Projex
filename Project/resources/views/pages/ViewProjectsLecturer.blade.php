@@ -30,107 +30,46 @@
 </div>
 <div class="container">
     <div class="col-left">
-        <div class="panel panel-primary" style="float:left; width:350; height:550; background: #4f788e; margin-top: 55px;">
+        <div class="panel panel-primary" style="float:left; width:500; height:550; background: #4f788e; margin-top: 55px;">
             <div class="panel-heading">
                 <h3 class="panel-title" style="font-weight:bold;text-transform:uppercase; text-align:center;">PROJECTS</h3>
             </div>
             <div class="panel-body">
                 <div class="col-xs-12">
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project1
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">Reserve</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project2
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">Reserve</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project3
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">Reserve</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project4
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">Reserve</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project5
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">Reserve</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project6
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">Reserve</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project7
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">Reserve</button>
-                        </li>
+                        @foreach($project as $prjct)
+                            <li class="list-group-item list-group-item-info" style="font-weight:bold;">
+                                {{$prjct->name}}
+                                <a class="btn btn-primary" href="{!! action('PageController@viewProject',[$prjct->id])!!}" target="_blank" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</a>
+                                <a class="btn btn-primary" href="{!! action('PageController@volunteerProject',[$prjct->id])!!}" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">Volunteer</a>
+                            </li>
+                            <br>
+                        @endforeach
                     </ul>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-center">
-        <div class="panel panel-primary" style="width:350; height:550; background: #4f788e; margin-top: 55px; margin-left:400px;">
+        <div class="panel panel-primary" style="width:400; height:550; background: #4f788e; margin-top: 55px; margin-left:550px;">
             <div class="panel-heading">
                 <h3 class="panel-title" style="font-weight:bold;text-transform:uppercase; text-align:center;">VOLUNTEERING PROJECTS</h3>
             </div>
             <div class="panel-body">
                 <div class="col-xs-12">
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project1
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project2
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project3
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project4
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project5
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project6
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                        </li>
-                        <br>
-                        <li class="list-group-item list-group-item-info" style="font-weight:bold;">
-                            Project7
-                            <button class="btn btn-primary" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</button>
-                        </li>
+                        @foreach($volunteer as $vlntr)
+                            <li class="list-group-item list-group-item-info" style="font-weight:bold;">
+                                {{$vlntr->project_name}}
+                                <a class="btn btn-primary" href="{!! action('PageController@viewProject',[$vlntr->project_id])!!}" target="_blank" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</a>
+                            </li>
+                            <br>
+                        @endforeach
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 </body>
