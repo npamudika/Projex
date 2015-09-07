@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalizedProjects;
 use App\Reservations;
 use App\Volunteers;
 use Illuminate\Http\Request;
@@ -18,11 +19,19 @@ class PageController extends Controller
         return view('pages.Index');
     }
 
+    public function viewLoginError(){
+        return view('pages.Error');
+    }
+
     public function viewProject($id){
         $project = Project::where("id",$id)->get();
         $user_id = $project[0]->user_id;
         $user = User::find($user_id);
-        return view('pages.Project', compact('project','user'));
+        $reservationCount = Reservations::where("project_id",$id)->count(); //Get number of reservation for identified project
+        $volunteerCount = Volunteers::where("project_id",$id)->count(); //Get number of volunteers for identified project
+        $finalized = FinalizedProjects::where("project_id",$id)->get();
+        $finalizedBy = $finalized[0]->user;
+        return view('pages.Project', compact('project','user','reservationCount','volunteerCount','finalizedBy'));
 
     }
 
@@ -55,14 +64,33 @@ class PageController extends Controller
         $user = Auth::user();
         $type = $user->type;
         $name = $user->name;
-        $project = Project::get();
-        $reservation = Reservations::where('user',$name)->get();
-        $volunteer = Volunteers::where('user',$name)->get();
+        $project = Project::get(); //Get all the projects from the Projects table
+
+        $reservation = Reservations::where('user',$name)->get(); //Get reserved projects
+        $reserved = array(); //Create array to store reserved project ids
+        foreach($reservation as $res){
+            array_push($reserved,$res->project_id); //Save each reserved project id to the array
+        }
+        $projectR = Project::whereNotIn('id',$reserved)->get(); //Get projects which are not reserved
+
+        $volunteer = Volunteers::where('user',$name)->get(); //Get volunteered projects
+        $volunteered = array(); //Create array to store volunteered project ids
+        foreach($volunteer as $vol){
+            array_push($volunteered,$vol->project_id); //Save each volunteered project id to the array
+        }
+        $projectV = Project::whereNotIn('id',$volunteered)->get(); //Get projects which are not volunteered
+
+        $finalizedProject = FinalizedProjects::where('user',$name)->get(); //Get finalized project
+        $finalized_pn = "";
+        if(sizeof($finalizedProject)!=0){
+            $finalized_pn = $finalizedProject[0]->project_name;
+        }
+
         if($type=="lecturer"){
-            return view('pages.ViewProjectsLecturer',compact('project','volunteer')); //Return the web page to view projects for a lecturer
+            return view('pages.ViewProjectsLecturer',compact('projectV','volunteer')); //Return the web page to view projects for a lecturer
         }
         elseif($type=="student"){
-            return view('pages.ViewProjectsStudent',compact('project','reservation')); //Return the web page to view projects for a student
+            return view('pages.ViewProjectsStudent',compact('projectR','reservation','finalized_pn')); //Return the web page to view projects for a student
         }
         elseif($type=="coordinato"){
             return view('pages.ViewProjects',compact('project')); //Return the web page to view projects for the coordinator
@@ -89,14 +117,33 @@ class PageController extends Controller
         $user = Auth::user();
         $type = $user->type;
         $name = $user->name;
-        $project = Project::get(); //Returns an array of project objects
-        $reservation = Reservations::where('user',$name)->get();
-        $volunteer = Volunteers::where('user',$name)->get();
+        $project = Project::get(); //Get all the projects from the Projects table
+
+        $reservation = Reservations::where('user',$name)->get(); //Get reserved projects
+        $reserved = array(); //Create array to store reserved project ids
+        foreach($reservation as $res){
+            array_push($reserved,$res->project_id); //Save each reserved project id to the array
+        }
+        $projectR = Project::whereNotIn('id',$reserved)->get(); //Get projects which are not reserved
+
+        $volunteer = Volunteers::where('user',$name)->get(); //Get volunteered projects
+        $volunteered = array(); //Create array to store volunteered project ids
+        foreach($volunteer as $vol){
+            array_push($volunteered,$vol->project_id); //Save each volunteered project id to the array
+        }
+        $projectV = Project::whereNotIn('id',$volunteered)->get(); //Get projects which are not volunteered
+
+        $finalizedProject = FinalizedProjects::where('user',$name)->get(); //Get finalized project
+        $finalized_pn = "";
+        if(sizeof($finalizedProject)!=0){
+            $finalized_pn = $finalizedProject[0]->project_name;
+        }
+
         if($type=="lecturer"){
-            return view('pages.ViewProjectsLecturer',compact('project','volunteer')); //Return the web page to view projects for a lecturer
+            return view('pages.ViewProjectsLecturer',compact('projectV','volunteer')); //Return the web page to view projects for a lecturer
         }
         elseif($type=="student"){
-            return view('pages.ViewProjectsStudent',compact('project','reservation')); //Return the web page to view projects for a student
+            return view('pages.ViewProjectsStudent',compact('projectR','reservation','finalized_pn')); //Return the web page to view projects for a student
         }
         elseif($type=="coordinato"){
             return view('pages.ViewProjects',compact('project')); //Return the web page to view projects for the coordinator
@@ -118,14 +165,20 @@ class PageController extends Controller
         $reservation -> status = "reserved";
         $reservation->save();
 
-        if($reservation -> status != "reserved" ){
-            $reservation->save();
+        $reservation = Reservations::where('user',$name)->get(); //Get reserved projects from the verified user
+        $reserved = array(); //Create array to store reserved project ids
+        foreach($reservation as $res){
+            array_push($reserved,$res->project_id); //Save each reserved project id to the array
+        }
+        $projectR = Project::whereNotIn('id',$reserved)->get(); //Get projects which are not reserved from the Project table
+
+        $finalizedProject = FinalizedProjects::where('user',$name)->get(); //Get finalized project
+        $finalized_pn = "";
+        if(sizeof($finalizedProject)!=0){
+            $finalized_pn = $finalizedProject[0]->project_name;
         }
 
-
-        $project = Project::get(); //Get all the projects from the Projects table
-        $reservation = Reservations::where('user',$name)->get(); //Get reservations from the verified user
-        return view('pages.ViewProjectsStudent',compact('project','reservation')); //Show reservations
+        return view('pages.ViewProjectsStudent',compact('projectR','reservation','finalized_pn')); //Show reservations
     }
 
     public  function volunteerProject($id){ //Add volunteered projects to the database
@@ -143,9 +196,44 @@ class PageController extends Controller
 
         $volunteer->save();
 
+        $volunteer = Volunteers::where('user',$name)->get(); //Get volunteered projects
+        $volunteered = array(); //Create array to store volunteered project ids
+        foreach($volunteer as $vol){
+            array_push($volunteered,$vol->project_id); //Save each volunteered project id to the array
+        }
+        $projectV = Project::whereNotIn('id',$volunteered)->get(); //Get projects which are not volunteered
 
-        $project = Project::get(); //Get all the projects from the Projects table
-        $volunteer = Volunteers::where('user',$name)->get(); //Get volunteering projects from the verified user
-        return view('pages.ViewProjectsLecturer',compact('project','volunteer')); //Show volunteering projects
+        return view('pages.ViewProjectsLecturer',compact('projectV','volunteer')); //Show volunteering projects
+    }
+
+    public function finalizeProject($id){
+        $user = Auth::user();
+        $name = $user->name;
+        $user_id = $user->id;
+        $project = Project::where("id",$id)->get();
+        $project_id = $project[0]->id;
+        $project_name = $project[0]->name;
+        $finalizedProject = new FinalizedProjects();
+        $finalizedProject -> user_id = $user_id;
+        $finalizedProject -> user = $name;
+        $finalizedProject -> project_id = $project_id;
+        $finalizedProject -> project_name = $project_name;
+
+        $finalizedProject->save();
+
+        $finalizedProject = FinalizedProjects::where('user',$name)->get(); //Get finalized project
+        $finalized_pn = "";
+        if(sizeof($finalizedProject)!=0){
+            $finalized_pn = $finalizedProject[0]->project_name;
+        }
+
+        $reservation = Reservations::where('user',$name)->get(); //Get reserved projects from the verified user
+        $reserved = array(); //Create array to store reserved project ids
+        foreach($reservation as $res){
+            array_push($reserved,$res->project_id); //Save each reserved project id to the array
+        }
+        $projectR = Project::whereNotIn('id',$reserved)->get(); //Get projects which are not reserved from the Project table
+
+        return view('pages.ViewProjectsStudent',compact('projectR','reservation','finalized_pn')); //Show finalized project
     }
 }

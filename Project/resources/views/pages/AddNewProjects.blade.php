@@ -61,9 +61,9 @@
             </div>
 
 
-        <button type="button" class="btn btn-default" data-dismiss="modal" style="width:150; height:40; background: #0d2945; margin-left:115px; font: bold; color: #edfdfd;">RESET</button>
+        {{--<button type="button" class="btn btn-default" data-dismiss="modal" style="width:150; height:40; background: #0d2945; margin-left:115px; font: bold; color: #edfdfd;">RESET</button>--}}
             <a href="{!! action('PageController@viewHome')!!}">
-                <button type="button" class="btn btn-default" data-dismiss="modal" style="width:150; height:40; background: #0d2945;  font: bold; color: #edfdfd;">EXIT</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left:120px; width:150; height:40; background: #0d2945;  font: bold; color: #edfdfd;">EXIT</button>
             </a>
         {!! Form::submit('CREATE PROJECT', array('class'=>'btn btn-primary', 'style'=>'font:bold; width:150; height:40; background: #0d2945;  font: bold; color: #edfdfd;')) !!}
         {!! Form::close() !!}

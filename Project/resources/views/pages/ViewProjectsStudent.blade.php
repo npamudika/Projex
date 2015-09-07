@@ -24,6 +24,7 @@
                 <a href="{!! action('PageController@viewHome')!!}">
                     <button class="btn btn-default" type="submit" style="float:right; color: #f2f9fa; background: #0d2945; margin-top: 10px; margin-left:50px; ">Home</button>
                 </a>
+                <span class ="label label-primary" style="font-size:18px; background:#0d2945; float:right; color: #f2f9fa; margin-top: 15px; margin-left:100px; text-transform: uppercase; "> {{$finalized_pn}} </span>
             </div>
         </div>
     </nav>
@@ -37,7 +38,7 @@
             <div class="panel-body">
                 <div class="col-xs-12">
                     <ul class="list-group">
-                        @foreach($project as $prjct)
+                        @foreach($projectR as $prjct)
                             <li class="list-group-item list-group-item-info" style="font-weight:bold;">
                                 {{$prjct->name}}
                                 <a class="btn btn-primary" href="{!! action('PageController@viewProject',[$prjct->id])!!}" target="_blank" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</a>
@@ -50,8 +51,9 @@
             </div>
         </div>
     </div>
+
     <div class="col-center">
-        <div class="panel panel-primary" style="width:400; height:550; background: #4f788e; margin-top: 55px; margin-left:550px;">
+        <div class="panel panel-primary" style="width:500; height:550; background: #4f788e; margin-top: 55px; margin-left:550px;">
             <div class="panel-heading">
                 <h3 class="panel-title" style="font-weight:bold;text-transform:uppercase; text-align:center;">RESERVATIONS</h3>
             </div>
@@ -62,6 +64,7 @@
                             <li class="list-group-item list-group-item-info" style="font-weight:bold;">
                                 {{$reserve->project_name}}
                                 <a class="btn btn-primary" href="{!! action('PageController@viewProject',[$reserve->project_id])!!}" target="_blank" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</a>
+                                <a class="btn btn-primary" href="{!! action('PageController@finalizeProject',[$reserve->project_id])!!}" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">Finalize</a>
                             </li>
                             <br>
                         @endforeach
@@ -70,7 +73,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 </body>

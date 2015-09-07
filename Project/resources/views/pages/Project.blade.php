@@ -18,7 +18,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <div class="container">
     <div class="raw">
-        <div class="jumbotron" style="width:650; height:550; background: #4f788e; margin-top: 50px; margin-left:280px;">
+        <div class="jumbotron" style="width:650; height:600; background: #4f788e; margin-top: 10px; margin-left:280px;">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title" style="font-weight:bold;text-transform:uppercase;">PROJECT DETAILS</h3>
@@ -35,6 +35,10 @@
                             <li class="list-group-item list-group-item-info" style="font-weight:bold;">Technologies</li>
                             <br>
                             <li class="list-group-item list-group-item-info" style="font-weight:bold;">Deadline</li>
+                            <br>
+                            <li class="list-group-item list-group-item-info" style="font-weight:bold;">Reservations</li>
+                            <br>
+                            <li class="list-group-item list-group-item-info" style="font-weight:bold;">Volunteers</li>
                         </ul>
                     </div>
                     <div class="col-xs-8">
@@ -59,13 +63,15 @@
                                 {{$project[0]->deadline}}
                             </a>
                             <br>
+                            <a href="#" class="list-group-item list-group-item-info">
+                                {{$reservationCount}}
+                            </a>
+                            <br>
+                            <a href="#" class="list-group-item list-group-item-info">
+                                {{$volunteerCount}}
+                            </a>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-body">
-                    <a class="btn btn-primary btn-lg" href="{!! action('PageController@viewDisplay')!!}" role="button" style="width:100; height:40; float:right; font-weight:bold;">Exit</a>
                 </div>
             </div>
         </div>

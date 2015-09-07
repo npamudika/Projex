@@ -37,7 +37,7 @@
             <div class="panel-body">
                 <div class="col-xs-12">
                     <ul class="list-group">
-                        @foreach($project as $prjct)
+                        @foreach($projectV as $prjct)
                             <li class="list-group-item list-group-item-info" style="font-weight:bold;">
                                 {{$prjct->name}}
                                 <a class="btn btn-primary" href="{!! action('PageController@viewProject',[$prjct->id])!!}" target="_blank" style="position:relative; top: -8px; float:right; font-weight:bold; color: #f2f9fa;">View</a>

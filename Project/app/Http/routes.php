@@ -2,12 +2,14 @@
 
 //Page Linking routes
 Route::get('/','PageController@viewIndex');
+Route::get('/login','PageController@viewLoginError');
 Route::get('/home','PageController@viewHome');
 Route::get('/new/project','PageController@viewAdd');
 Route::get('/display','PageController@viewDisplay');
 Route::get('/view/project/{id}','PageController@viewProject');
 Route::get('/view/project/reserved/{id}','PageController@reserveProject');
 Route::get('/view/project/volunteered/{id}','PageController@volunteerProject');
+Route::get('/view/project/finalised/{id}','PageController@finalizeProject');
 Route::post('/add/project','PageController@addProjects');
 
 // Authentication routes
